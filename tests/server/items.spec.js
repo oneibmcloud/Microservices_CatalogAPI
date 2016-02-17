@@ -157,8 +157,8 @@
     
     describe('list Function', function() {
         it('All Db content listed successfully', function() {
-            mockdb.itemsDb.list = function( arg, callback ){
-                callback( false, 'test body', 'headers' );  
+            mockdb.itemsDb.view = function(design_name, view_name, obj, callback){
+                callback(false, 'test body');
             };
             
             items.list( reqMock, resMock );
@@ -166,8 +166,8 @@
         });
         
         it('Db content not listed - db error', function() {
-            mockdb.itemsDb.list = function( arg, callback ){
-                callback( 'forced error', 'test body', 'headers' );  
+            mockdb.itemsDb.view = function(design_name, view_name, obj, callback){
+                callback( 'forced error', 'test body');  
             };
             
             items.list( reqMock, resMock );
